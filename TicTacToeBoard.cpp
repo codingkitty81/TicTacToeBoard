@@ -19,7 +19,13 @@ TicTacToeBoard::TicTacToeBoard()
 **/
 Piece TicTacToeBoard::toggleTurn()
 {
-  return Invalid;
+  if(turn == X) {
+    turn = O;
+  } else {
+    turn = X;
+  }
+  
+  return turn;
 }
 
 /**
@@ -33,7 +39,17 @@ Piece TicTacToeBoard::toggleTurn()
 **/ 
 Piece TicTacToeBoard::placePiece(int row, int column)
 {
-  return Invalid;
+  if(row < 0 || row > 2 || column < 0 || column > 2) {
+    return Invalid;
+  }
+  if(board[row][column] == Blank) {
+    board[row][column] = turn;
+    Piece prevTurn = turn;
+    toggleTurn();
+    return prevTurn;
+  } else {
+    return getPiece(row, column);
+  }
 }
 
 /**
@@ -42,6 +58,17 @@ Piece TicTacToeBoard::placePiece(int row, int column)
 **/
 Piece TicTacToeBoard::getPiece(int row, int column)
 {
+  if(row < 0 || row > 2 || column < 0 || column > 2) {
+    return Invalid;
+  }
+  if(board[row][column] == Blank) {
+    return Blank;
+  } else if(board[row][column] == X) {
+    return X;
+  } else if(board[column][row] == O) {
+    return O;
+  }
+  
   return Invalid;
 }
 
@@ -51,5 +78,66 @@ Piece TicTacToeBoard::getPiece(int row, int column)
 **/
 Piece TicTacToeBoard::getWinner()
 {
-  return Invalid;
+  Piece tic, tac, toe;
+  int r = 0;
+  int c = 0;
+  
+  //compare rows
+  for(int i = 0; i < 3; i++) {
+    tic = getPiece(i, c);
+    tac = getPiece(i, c+1);
+    toe = getPiece(i, c+2);
+    
+    //look for blank
+    if(tic == Blank || tac == Blank || toe == Blank) {
+      return Invalid;
+    }
+    
+    if(tic == tac && tic == toe) {
+      return tic;
+    }
+  }
+  
+  //compare columns
+  for(int k = 0; k < 3; k++) {
+    tic = getPiece(r, k);
+    tac = getPiece(r+1, k);
+    toe = getPiece(r+2, k);
+    
+    //look for blank
+    if(tac == Blank || tac == Blank || toe == Blank) {
+      return Invalid;
+    }
+    
+    if(tic == tac && tic == toe) {
+      return tic;
+    }
+  }
+  
+  //compare diagnals
+  tic = getPiece(r, c);
+  tac = getPiece(r+1, c+1);
+  toe = getPiece(r+2, c+2);
+  
+  if(tic == Blank || tac == Blank || toe == Blank) {
+    return Invalid;
+  }
+  
+  if(tic == tac && tic == toe) {
+    return tic;
+  }
+  
+  tic = getPiece(r+2, c);
+  tac = getPiece(r+1, c+1);
+  toe = getPiece(r, c+2);
+  
+  if(tic == Blank || tac == Blank || toe == Blank) {
+    return Invalid;
+  }
+  
+  if(tic == tac && tic == toe) {
+    return tic;
+  }
+  
+  return Blank;
 }
