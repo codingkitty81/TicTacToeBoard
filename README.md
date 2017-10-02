@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/codingkitty81/TicTacToeBoard.svg?branch=master)](https://travis-ci.org/codingkitty81/TicTacToeBoard)
 
+[![Coverage Status](https://coveralls.io/repos/github/codingkitty81/TicTacToeBoard/badge.svg?branch=master)](https://coveralls.io/github/codingkitty81/TicTacToeBoard?branch=master)
+
 ## Associated Enumerated Types
 `Piece` has four possible values: `X`,`O`,`Invalid`, and `Blank`
 
