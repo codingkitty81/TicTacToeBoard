@@ -56,14 +56,6 @@ Piece TicTacToeBoard::placePiece(int row, int column)
  * Returns what piece is at the provided coordinates, or Blank if there
  * are no pieces there, or Invalid if the coordinates are out of bounds
 **/
-
-/**
- * BUG: When getting the piece from a specific position on the board, if
- * that position is neither blank or X, then when checking for O the column
- * and row are flipped. For example if checking position 2,1 and it is neither
- * Blank or X, position 1,2 will be checked for an O. If this position is
- * not an O, the function will return Invalid.
-**/
 Piece TicTacToeBoard::getPiece(int row, int column)
 {
   if(row < 0 || row > 2 || column < 0 || column > 2) {
@@ -73,7 +65,7 @@ Piece TicTacToeBoard::getPiece(int row, int column)
     return Blank;
   } else if(board[row][column] == X) {
     return X;
-  } else if(board[column][row] == O) {
+  } else if(board[row][column] == O) {
     return O;
   }
   
