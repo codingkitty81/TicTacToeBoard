@@ -81,13 +81,7 @@ TEST(TicTacToeBoardTest, pieceOget) {
 	Piece result = board.getPiece(1, 1);
 	ASSERT_EQ(O,result);
 }
-/**
- * BUG: When getting the piece from a specific position on the board, if
- * that position is neither blank or X, then when checking for O the column
- * and row are flipped. For example if checking position 2,1 and it is neither
- * Blank or X, position 1,2 will be checked for an O. If this position is
- * not an O, the function will return Invalid.
-**/
+
 TEST(TicTacToeBoardTest, pieceO2get) {
 	TicTacToeBoard board;
 	board.toggleTurn();
@@ -124,13 +118,7 @@ TEST(TicTacToeBoardTest, gameNotOver2) {
 	Piece result = board.getWinner();
 	ASSERT_EQ(Invalid,result);
 }
-/**
- * BUG: When getting the piece from a specific position on the board, if
- * that position is neither blank or X, then when checking for O the column
- * and row are flipped. For example if checking position 2,1 and it is neither
- * Blank or X, position 1,2 will be checked for an O. If this position is
- * not an O, the function will return Invalid.
-**/
+
 TEST(TicTacToeBoardTest, getOwinnerRow) {
 	TicTacToeBoard board;
 	board.toggleTurn();
